@@ -15,16 +15,15 @@ set relativenumber
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'sheerun/vim-polyglot'
-  
 
-Plug 'morhetz/gruvbox'
-Plug 'shinchu/lightline-gruvbox.vim'
+Plug 'projekt0n/github-nvim-theme'
 
 Plug 'maximbaz/lightline-ale'
 Plug 'itchyny/lightline.vim'
 
-Plug 'dense-analysis/ale'
+Plug 'vim-airline/vim-airline'
 
+Plug 'dense-analysis/ale'
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -47,8 +46,15 @@ Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
 call plug#end()
 
-colorscheme gruvbox
-let g:gruvbox_contrast_dark = "medium"
+set termguicolors
+
+colorscheme github_dark_default
+
+let g:github_comment_style = "italic"
+let g:github_keyword_style = "italic"
+let g:github_function_style = "italic"
+let g:github_variable_style = "italic"
+
 highlight Normal ctermbg=NONE
 set laststatus=2
 set noshowmode
@@ -56,20 +62,23 @@ set encoding=UTF-8
 
 let g:coc_global_extensions=['coc-json', 'coc-tsserver', 'coc-emmet', 'coc-tslint', 'coc-prettier']
 
-let g:lightline ={}
-let g:lightline.colorscheme = 'gruvbox'
+
 
 let g:user_emmet_mode="n"
 
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 
 let mapleader =" "
 
+
+
 nmap <Leader>s <Plug>(easymotion-s2)
 nmap <Leader>t :NERDTreeFind<CR>
 
-
-nmap <Leader>w <Plug>(Prettier)
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.svelte,*.yaml,*.html Prettier
+"nmap <Leader>f <Plug>(Prettier)
 nmap <Leader>w :w<CR>
 nmap <Leader>q :q<CR>
 
